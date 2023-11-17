@@ -25,6 +25,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class FrmUsuarios extends JFrame implements ActionListener {
 
@@ -127,8 +128,9 @@ public class FrmUsuarios extends JFrame implements ActionListener {
 		panel.add(cbRoles);
 		
 		btnRegistrar = new JButton("REGISTRAR");
+		btnRegistrar.setIcon(new ImageIcon(FrmUsuarios.class.getResource("/img/agregar.png")));
 		btnRegistrar.addActionListener(this);
-		btnRegistrar.setBounds(44, 276, 125, 38);
+		btnRegistrar.setBounds(44, 276, 144, 38);
 		panel.add(btnRegistrar);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -156,7 +158,8 @@ public class FrmUsuarios extends JFrame implements ActionListener {
 		texId.setColumns(10);
 		
 		btnEliminar = new JButton("ELIMINAR");
-		btnEliminar.setBounds(44, 335, 125, 38);
+		btnEliminar.setIcon(new ImageIcon(FrmUsuarios.class.getResource("/img/eliminar.png")));
+		btnEliminar.setBounds(44, 335, 144, 38);
 		panel.add(btnEliminar);
 		
 		ListarUsuarios();

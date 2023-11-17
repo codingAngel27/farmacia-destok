@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import vista.FrmClientes;
+import vista.FrmEmpresa;
 import vista.FrmProductos;
 import vista.FrmProveedor;
 import vista.FrmUsuarios;
@@ -35,6 +36,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	private JMenuItem mntmNewMenuItem_1;
 	private JMenuItem mntmNewMenuItem_2;
 	private JMenuItem mntmNewMenuItem_3;
+	private JMenuItem mntmNewMenuItem_4;
 
 	/**
 	 * Launch the application.
@@ -56,6 +58,7 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public MenuPrincipal() {
+		setResizable(false);
 		setTitle("SISTEMA LA REMEDIOSA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1300, 773);
@@ -71,11 +74,12 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mnNewMenu_5.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/configuracion.png")));
 		mnNewMenu.add(mnNewMenu_5);
 		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("EMPRESA");
-		mntmNewMenuItem_5.setHorizontalTextPosition(SwingConstants.LEFT);
-		mntmNewMenuItem_5.setHorizontalAlignment(SwingConstants.TRAILING);
-		mntmNewMenuItem_5.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/empresa.png")));
-		mnNewMenu_5.add(mntmNewMenuItem_5);
+		mntmNewMenuItem_4 = new JMenuItem("EMPRESA");
+		mntmNewMenuItem_4.addActionListener(this);
+		mntmNewMenuItem_4.setHorizontalTextPosition(SwingConstants.LEFT);
+		mntmNewMenuItem_4.setHorizontalAlignment(SwingConstants.TRAILING);
+		mntmNewMenuItem_4.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/empresa.png")));
+		mnNewMenu_5.add(mntmNewMenuItem_4);
 		
 		mntmNewMenuItem_3 = new JMenuItem("USUARIOS");
 		mntmNewMenuItem_3.addActionListener(this);
@@ -137,6 +141,9 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mntmNewMenuItem_4) {
+			actionPerformedMntmNewMenuItem_5JMenuItem(e);
+		}
 		if (e.getSource() == mntmNewMenuItem_3) {
 			actionPerformedMntmNewMenuItem_6JMenuItem(e);
 		}
@@ -169,5 +176,10 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		FrmUsuarios u = new FrmUsuarios();
 		u.setVisible(true);
 		u.setLocationRelativeTo(this);
+	}
+	protected void actionPerformedMntmNewMenuItem_5JMenuItem(ActionEvent e) {
+		FrmEmpresa e1 = new FrmEmpresa();
+		e1.setVisible(true);
+		e1.setLocationRelativeTo(this);
 	}
 }
