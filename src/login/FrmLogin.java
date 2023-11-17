@@ -66,6 +66,7 @@ public class FrmLogin extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public FrmLogin() {
+		setTitle("SISTEMA LA REMEDIOSA");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 584, 577);
 		contentPane = new JPanel();
@@ -90,15 +91,17 @@ public class FrmLogin extends JFrame implements ActionListener {
 		contentPane.add(lblNewLabel);
 		
 		password = new JPasswordField();
+		password.setText("admin");
 		password.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
-		password.setBackground(new Color(0, 206, 209));
+		password.setBackground(new Color(0, 191, 255));
 		password.setBounds(162, 243, 218, 40);
 		contentPane.add(password);
 		
 		textCorreo = new JTextField();
+		textCorreo.setText("admin@admin.com");
 		textCorreo.setColumns(10);
 		textCorreo.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
-		textCorreo.setBackground(new Color(0, 206, 209));
+		textCorreo.setBackground(new Color(0, 191, 255));
 		textCorreo.setBounds(162, 139, 218, 40);
 		contentPane.add(textCorreo);
 		
@@ -109,9 +112,9 @@ public class FrmLogin extends JFrame implements ActionListener {
 		contentPane.add(lblNewLabel_1);
 		
 		barra = new JProgressBar();
-		barra.setForeground(new Color(30, 144, 255));
+		barra.setForeground(new Color(0, 206, 209));
 		barra.setFont(new Font("Segoe UI Black", Font.BOLD, 13));
-		barra.setBackground(new Color(0, 206, 209));
+		barra.setBackground(new Color(0, 191, 255));
 		barra.setBounds(94, 457, 368, 40);
 		contentPane.add(barra);
 		
@@ -129,25 +132,29 @@ public class FrmLogin extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_5 = new JLabel("INICIAR SESION");
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_5.setForeground(new Color(255, 255, 255));
+		lblNewLabel_5.setForeground(new Color(0, 191, 255));
 		lblNewLabel_5.setOpaque(true);
-		lblNewLabel_5.setBackground(new Color(0, 0, 255));
-		lblNewLabel_5.setFont(new Font("Segoe UI Black", Font.BOLD | Font.ITALIC, 23));
-		lblNewLabel_5.setBounds(0, 56, 569, 31);
+		lblNewLabel_5.setBackground(Color.WHITE);
+		lblNewLabel_5.setFont(new Font("Segoe UI Black", Font.BOLD | Font.ITALIC, 27));
+		lblNewLabel_5.setBounds(0, 36, 569, 40);
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setOpaque(true);
-		lblNewLabel_2.setBackground(new Color(0, 206, 209));
+		lblNewLabel_2.setBackground(new Color(0, 191, 255));
 		lblNewLabel_2.setBounds(0, 0, 569, 538);
 		contentPane.add(lblNewLabel_2);
+		
+		JLabel label = new JLabel("New label");
+		label.setBounds(76, 11, 46, 14);
+		contentPane.add(label);
 	}
 	
-	private void Limpiar(){
+	/*private void Limpiar(){
 		textCorreo.setText("");
 		password.setText("");
 		textCorreo.requestFocus();
-	}
+	}*/
 	private class BarraProgreso implements ActionListener {
 
         @Override
@@ -184,7 +191,7 @@ public class FrmLogin extends JFrame implements ActionListener {
                 tiempo.start();
             }else{
                 JOptionPane.showMessageDialog(null, "Correo o la Contraseña incorrecta");
-                Limpiar();
+                //Limpiar();
             }
             
         }
