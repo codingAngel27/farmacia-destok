@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
-import controlador.ArregloCliente;
+import controladores.ClienteDAO;
 import entidad.Cliente;
 
 import javax.swing.JScrollPane;
@@ -55,7 +55,7 @@ public class FrmClientes extends JFrame implements ActionListener, MouseListener
 	MatteBorder borderBottom = new MatteBorder(0, 0, 2, 0, Color.BLACK);
 	DefaultTableModel model = new DefaultTableModel();
 	Cliente cl = new Cliente();
-	ArregloCliente client = new ArregloCliente();
+	ClienteDAO client = new ClienteDAO();
 	private JLabel lblNewLabel;
 
 	/**

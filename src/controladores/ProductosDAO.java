@@ -1,4 +1,4 @@
-package controlador;
+package controladores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,7 @@ import entidad.Config;
 import entidad.Productos;
 import entidad.Proveedor;
 
-public class ArregloProductos {
+public class ProductosDAO {
 	Connection con;
     ConectorBD cn = new ConectorBD();
     PreparedStatement ps;
@@ -184,6 +184,7 @@ public class ArregloProductos {
     public boolean ModificarDatos(Config conf){
        String sql = "UPDATE config SET ruc=?, nombre=?, telefono=?, direccion=?, mensaje=? WHERE id=?";
        try {
+    	   con = ConectorBD.getConnection();
            ps = con.prepareStatement(sql);
            ps.setString(1, conf.getRuc());
            ps.setString(2, conf.getNombre());
@@ -204,5 +205,6 @@ public class ArregloProductos {
            }
        }
    }
+
 
 }

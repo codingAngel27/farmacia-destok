@@ -1,15 +1,11 @@
 package vista;
-
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import controlador.ArregloProductos;
+import controladores.ProductosDAO;
 import entidad.Config;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -19,6 +15,10 @@ import java.awt.event.ActionEvent;
 
 public class FrmEmpresa extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2516756026285411389L;
 	private JPanel contentPane;
 	private JTextField textRuc;
 	private JTextField textNombre;
@@ -28,7 +28,7 @@ public class FrmEmpresa extends JFrame implements ActionListener {
 	private JTextField textID;
 	private JButton btnActualizar;
 	Config conf = new Config();
-    ArregloProductos proDao = new ArregloProductos();
+    ProductosDAO proDao = new ProductosDAO();
 	/**
 	 * Launch the application.
 	 */
@@ -118,8 +118,8 @@ public class FrmEmpresa extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnActualizarJButton(ActionEvent e) {
+		Actualizar();
 	}
-	
 	private void ListarConfig() {
         conf = proDao.BuscarDatos();
         textID.setText("" + conf.getId());

@@ -17,8 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.border.MatteBorder;
-
-import controlador.ArregloLogin;
+import controladores.LoginDAO;
 import entidad.Login;
 import menu.MenuPrincipal;
 
@@ -35,7 +34,7 @@ public class FrmLogin extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	Login lg = new Login();
-    ArregloLogin login = new ArregloLogin();
+    LoginDAO login = new LoginDAO();
 	
 	private Timer tiempo;
     int contador;
@@ -169,6 +168,10 @@ public class FrmLogin extends JFrame implements ActionListener {
 	public void Validar(){
         String correo = textCorreo.getText();
         String pass = String.valueOf(password.getPassword());
+        if(!correo.isEmpty() && !pass.isEmpty())
+        {
+			
+		
         if (!"".equals(correo) || !"".equals(pass)) {
             
             lg = login.log(correo, pass);
@@ -183,7 +186,11 @@ public class FrmLogin extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Correo o la Contraseña incorrecta");
                 Limpiar();
             }
+            
         }
+        } else  {
+        	JOptionPane.showMessageDialog(null, "Los campos estan vacios");
+		}
     }
 	
 	private void Salir() {

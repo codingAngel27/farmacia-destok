@@ -1,4 +1,4 @@
-package controlador;
+package controladores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entidad.Login;
 import conexion.ConectorBD;
+import entidad.Login;
 
 public class UsuarioDAO {
 	 Connection con;

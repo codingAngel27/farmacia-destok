@@ -1,4 +1,4 @@
-package controlador;
+package controladores;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@ import java.util.List;
 import conexion.ConectorBD;
 import entidad.Login;
 
-public class ArregloLogin {
+public class LoginDAO {
 	Connection con;
     PreparedStatement ps;
     ResultSet rs;
@@ -75,6 +75,5 @@ public class ArregloLogin {
            System.out.println(e.toString());
        }
        return Lista;
-   }
-
+}
 }

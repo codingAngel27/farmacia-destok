@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import controlador.ArregloProveedor;
+import controladores.ProveedorDAO;
 import entidad.Proveedor;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -45,7 +45,7 @@ public class FrmProveedor extends JFrame implements ActionListener, MouseListene
 	
 	Proveedor pro = new Proveedor();
 	
-	ArregloProveedor arrProvee = new ArregloProveedor();
+	ProveedorDAO arrProvee = new ProveedorDAO();
 	private JTextField textId;
 	
 

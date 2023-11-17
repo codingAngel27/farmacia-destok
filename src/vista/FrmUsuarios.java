@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import controlador.UsuarioDAO;
+import controladores.UsuarioDAO;
 import entidad.Login;
 import java.awt.Color;
 import javax.swing.JTextField;

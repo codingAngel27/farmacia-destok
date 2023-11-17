@@ -5,8 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import controlador.ArregloProductos;
-import controlador.ArregloProveedor;
+import controladores.ProductosDAO;
+import controladores.ProveedorDAO;
 import entidad.Combo;
 import entidad.Productos;
 import entidad.Proveedor;
@@ -47,9 +47,9 @@ public class FrmProductos extends JFrame implements ActionListener, MouseListene
 	private JComboBox<Combo> cbProveedor;
 
 	Productos prod = new Productos();
-	ArregloProductos arrPro = new ArregloProductos();
+	ProductosDAO arrPro = new ProductosDAO();
 
-	ArregloProveedor arrProvee = new ArregloProveedor();
+	ProveedorDAO arrProvee = new ProveedorDAO();
 
 	DefaultTableModel model = new DefaultTableModel();
 	private JTextField textIdPro;
