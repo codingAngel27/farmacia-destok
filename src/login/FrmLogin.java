@@ -20,8 +20,6 @@ import javax.swing.border.MatteBorder;
 import controladores.LoginDAO;
 import entidad.Login;
 import menu.MenuPrincipal;
-
-
 import java.awt.Color;
 import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;

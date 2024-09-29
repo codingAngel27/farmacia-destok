@@ -1,9 +1,12 @@
 package menu;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 //import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
@@ -11,18 +14,26 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
+import vista.FrmAyuda;
 import vista.FrmClientes;
 import vista.FrmEmpresa;
 import vista.FrmProductos;
 import vista.FrmProveedor;
+import vista.FrmReporte;
 import vista.FrmUsuarios;
+import vista.FrmVenta;
 
 import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import java.awt.Toolkit;
 
-public class MenuPrincipal extends JFrame implements ActionListener {
+public class MenuPrincipal extends JFrame implements ActionListener, MenuListener{
 
 	/**
 	 * 
@@ -37,6 +48,13 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	private JMenuItem mntmNewMenuItem_2;
 	private JMenuItem mntmNewMenuItem_3;
 	private JMenuItem mntmNewMenuItem_4;
+	private JMenu mnVenta;
+	private JMenu mnReporte;
+	private JMenuItem menuGenerarVenta;
+	private JMenuItem menuReportesDia;
+	private JMenuItem menuAyuda;
+	private JMenuItem mntmNewMenuItem;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -58,9 +76,24 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public MenuPrincipal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/img/iconoFarmacia.png")));
 		setResizable(false);
 		setTitle("SISTEMA LA REMEDIOSA");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+		    @Override
+		    public void windowClosing(WindowEvent e) {
+		        int respuesta = JOptionPane.showConfirmDialog(null, "¿Realmente desea salir del sistema?", "Confirmar Salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		        if (respuesta == JOptionPane.YES_OPTION) {
+		            // Si el usuario selecciona "Sí", cerramos la ventana y salimos del sistema
+		            dispose();
+		            
+		        } else {
+		        	//System.exit(0);// Si el usuario selecciona "No", simplemente cerramos el cuadro de diálogo y la ventana seguirá abierta
+		        }
+		    }
+		});
 		setBounds(100, 100, 1300, 773);
 		
 		JMenuBar menuBar_1 = new JMenuBar();
@@ -88,7 +121,8 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mntmNewMenuItem_3.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/usuarios.png")));
 		mnNewMenu_5.add(mntmNewMenuItem_3);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("SALIR");
+		mntmNewMenuItem = new JMenuItem("SALIR");
+		mntmNewMenuItem.addActionListener(this);
 		mntmNewMenuItem.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/salir.png")));
 		mnNewMenu.add(mntmNewMenuItem);
 		
@@ -111,36 +145,64 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		mntmNewMenuItem_2.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/producto.png")));
 		menuMantenimiento.add(mntmNewMenuItem_2);
 		
-		JMenu mnNewMenu_2 = new JMenu("VENTAS");
-		mnNewMenu_2.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/venta.png")));
-		menuBar_1.add(mnNewMenu_2);
+		mnVenta = new JMenu("VENTAS");
+		mnVenta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/venta.png")));
+		mnVenta.addMenuListener(this);
+		menuBar_1.add(mnVenta);
 		
-		JMenu mnNewMenu_3 = new JMenu("REPORTES");
-		mnNewMenu_3.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/reporte.png")));
-		menuBar_1.add(mnNewMenu_3);
+		menuGenerarVenta = new JMenuItem("GENERAR NUEVA VENTA");
+		menuGenerarVenta.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/generarventa.png")));
+		menuGenerarVenta.addActionListener(this);
+		mnVenta.add(menuGenerarVenta);
+		
+		mnReporte = new JMenu("REPORTES");
+		mnReporte.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/reporte.png")));
+		mnReporte.addMenuListener(this);
+		menuBar_1.add(mnReporte);
+		
+		menuReportesDia = new JMenuItem("REPORTES DEL DIA");
+		menuReportesDia.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/reporteDia.png")));
+		menuReportesDia.addActionListener(this);
+		mnReporte.add(menuReportesDia);
 		
 		JMenu mnNewMenu_4 = new JMenu("AYUDA");
 		mnNewMenu_4.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/ayuda.png")));
 		menuBar_1.add(mnNewMenu_4);
+		
+		menuAyuda = new JMenuItem("Sobre...");
+		menuAyuda.addActionListener(this);
+		mnNewMenu_4.add(menuAyuda);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(0, 0, 1274, 685);
-		contentPane.add(desktopPane);
-		
-		/*ImageIcon imageIcon = new ImageIcon(MenuPrincipal.class.getResource("/img/fondo-menu.jpg"));
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/img/fondo-menu.jpg")));
+		lblNewLabel.setBounds(0, 0, 1284, 696);
+		contentPane.add(lblNewLabel);
+		ImageIcon originalIcon = new ImageIcon(MenuPrincipal.class.getResource("/img/fondo-menu.jpg"));
+		Image originalImage = originalIcon.getImage();
+		Image resizedImage = originalImage.getScaledInstance(1284, 696, Image.SCALE_SMOOTH);
+		ImageIcon resizedIcon = new ImageIcon(resizedImage);
+		lblNewLabel.setIcon(resizedIcon);
 
-		//Redimensionar la imagen xd
-		Image image = imageIcon.getImage().getScaledInstance(1274, 696, Image.SCALE_SMOOTH);
-		ImageIcon resizedIcon = new ImageIcon(image);*/
-		///////////////////////////////	
 	}
 	
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == mntmNewMenuItem) {
+			actionPerformedMntmNewMenuItemJMenuItem(e);
+		}
+		if (e.getSource() == menuAyuda) {
+			actionPerformedMenuAyudaJMenuItem(e);
+		}
+		if (e.getSource() == menuReportesDia) {
+			actionPerformedMenuReportesDiaJMenuItem(e);
+		}
+		if (e.getSource() == menuGenerarVenta) {
+			actionPerformedMenuGenerarVentaJMenuItem(e);
+		}
 		if (e.getSource() == mntmNewMenuItem_4) {
 			actionPerformedMntmNewMenuItem_5JMenuItem(e);
 		}
@@ -181,5 +243,45 @@ public class MenuPrincipal extends JFrame implements ActionListener {
 		FrmEmpresa e1 = new FrmEmpresa();
 		e1.setVisible(true);
 		e1.setLocationRelativeTo(this);
+	}
+	protected void actionPerformedMenuGenerarVentaJMenuItem(ActionEvent e) {
+		FrmVenta v = new FrmVenta();
+		v.setVisible(true);
+		v.setLocationRelativeTo(this);
+	}
+	protected void actionPerformedMenuReportesDiaJMenuItem(ActionEvent e) {
+		FrmReporte r = new FrmReporte();
+		r.setVisible(true);
+	    r.setLocationRelativeTo(this);	
+	}
+
+	@Override
+	public void menuSelected(MenuEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void menuDeselected(MenuEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void menuCanceled(MenuEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	protected void actionPerformedMenuAyudaJMenuItem(ActionEvent e) {
+		FrmAyuda a = new FrmAyuda();
+		a.setVisible(true);
+		a.setLocationRelativeTo(this);
+	}
+	protected void actionPerformedMntmNewMenuItemJMenuItem(ActionEvent e) {
+		int respuesta = JOptionPane.showConfirmDialog(null, "¿Seguro que guardo todos los cambios?", "Confirmar Salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (respuesta == JOptionPane.YES_OPTION) {
+        	System.exit(0);
+        } else {
+        }
 	}
 }

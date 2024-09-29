@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import controladores.ProductosDAO;
 import controladores.ProveedorDAO;
 import entidad.Combo;
-import entidad.Productos;
+import entidad.Producto;
 import entidad.Proveedor;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -46,7 +46,7 @@ public class FrmProductos extends JFrame implements ActionListener, MouseListene
 	private JButton btnEliminar;
 	private JComboBox<Combo> cbProveedor;
 
-	Productos prod = new Productos();
+	Producto prod = new Producto();
 	ProductosDAO arrPro = new ProductosDAO();
 
 	ProveedorDAO arrProvee = new ProveedorDAO();
@@ -262,7 +262,7 @@ public class FrmProductos extends JFrame implements ActionListener, MouseListene
 	        double precio = Double.parseDouble(textPrecio.getText());
 
 	        if (!codigo.isEmpty() && !nombre.isEmpty() && proveedorId >= 0 && stock > 0 && precio > 0) {
-	            Productos prod = new Productos();
+	            Producto prod = new Producto();
 	            prod.setCodigo(codigo);
 	            prod.setNombre(nombre);
 	            prod.setProveedor(proveedorId);
@@ -293,7 +293,7 @@ public class FrmProductos extends JFrame implements ActionListener, MouseListene
 	}
 
 	private void ListarProductos() {
-		List<Productos> listaPro = arrPro.ListarProductos();
+		List<Producto> listaPro = arrPro.ListarProductos();
 		model.setRowCount(0);
 		for (int i = 0; i < listaPro.size(); i++) {
 			Object[] fila = { listaPro.get(i).getId(), listaPro.get(i).getCodigo(), listaPro.get(i).getNombre(),
@@ -310,7 +310,7 @@ public class FrmProductos extends JFrame implements ActionListener, MouseListene
 	
 	        if (cbProveedor.getSelectedIndex() >= 1) {
 	            if (!textCodigo.getText().isEmpty() || !textDescripcion.getText().isEmpty() || !textStock.getText().isEmpty() || !textPrecio.getText().isEmpty()) {
-	                Productos prod = new Productos();
+	                Producto prod = new Producto();
 	                prod.setCodigo(textCodigo.getText());
 	                prod.setNombre(textDescripcion.getText());
 	                Combo itemP = (Combo) cbProveedor.getSelectedItem();

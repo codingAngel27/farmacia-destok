@@ -9,7 +9,7 @@ import java.util.List;
 
 import conexion.ConectorBD;
 import entidad.Config;
-import entidad.Productos;
+import entidad.Producto;
 import entidad.Proveedor;
 
 public class ProductosDAO {
@@ -18,7 +18,7 @@ public class ProductosDAO {
     PreparedStatement ps;
     ResultSet rs;
     
-    public boolean RegistrarProductos(Productos pro){
+    public boolean RegistrarProductos(Producto pro){
         String sql = "INSERT INTO productos (codigo, nombre, proveedor, stock, precio) VALUES (?,?,?,?,?)";
         try {
             con = ConectorBD.getConnection();
@@ -36,15 +36,15 @@ public class ProductosDAO {
         }
     }
     
-    public List<Productos> ListarProductos(){
-       List<Productos> Listapro = new ArrayList<Productos>();
+    public List<Producto> ListarProductos(){
+       List<Producto> Listapro = new ArrayList<Producto>();
        String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN productos p ON pr.id = p.proveedor ORDER BY p.id DESC";
        try {
            con = ConectorBD.getConnection();
            ps = con.prepareStatement(sql);
            rs = ps.executeQuery();
            while (rs.next()) {               
-               Productos pro = new Productos();
+               Producto pro = new Producto();
                pro.setId(rs.getInt("id"));
                pro.setCodigo(rs.getString("codigo"));
                pro.setNombre(rs.getString("nombre"));
@@ -79,7 +79,7 @@ public class ProductosDAO {
        }
    }
     
-    public boolean ModificarProductos(Productos pro){
+    public boolean ModificarProductos(Producto pro){
        String sql = "UPDATE productos SET codigo=?, nombre=?, proveedor=?, stock=?, precio=? WHERE id=?";
        try {
            ps = con.prepareStatement(sql);
@@ -103,8 +103,8 @@ public class ProductosDAO {
        }
    }
     
-    public Productos BuscarPro(String cod){
-        Productos producto = new Productos();
+    public Producto BuscarPro(String cod){
+        Producto producto = new Producto();
         String sql = "SELECT * FROM productos WHERE codigo = ?";
         try {
             con = ConectorBD.getConnection();
@@ -122,8 +122,8 @@ public class ProductosDAO {
         }
         return producto;
     }
-    public Productos BuscarId(int id){
-        Productos pro = new Productos();
+    public Producto BuscarId(int id){
+        Producto pro = new Producto();
         String sql = "SELECT pr.id AS id_proveedor, pr.nombre AS nombre_proveedor, p.* FROM proveedor pr INNER JOIN productos p ON p.proveedor = pr.id WHERE p.id = ?";
         try {
             con = ConectorBD.getConnection();
